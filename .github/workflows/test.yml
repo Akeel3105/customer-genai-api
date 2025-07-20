@@ -18,7 +18,11 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest black
+
+      - name: Check code style with black
+        run: |
+          black --check .
 
       - name: Run tests
         run: pytest
