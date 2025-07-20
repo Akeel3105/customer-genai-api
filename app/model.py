@@ -2,16 +2,15 @@
 
 from transformers import pipeline
 
-# Load a sentiment analysis model from Hugging Face
-classifier = pipeline("text-classification", model="distilbert-base-uncased-finetuned-sst-2-english")
-
-# Basic rule-based mapping from sentiment to category
 def classify_ticket(ticket_text: str) -> dict:
+    # Lazy load the classifier to reduce startup memory
+    classifier = pipeline("text-classification", model="distilbert-base-uncased-finetuned-sst-2-english")
+
     sentiment = classifier(ticket_text)[0]
-    label = sentiment['label']  # 'POSITIVE' or 'NEGATIVE'
+    label = sentiment['label']
     score = round(sentiment['score'], 2)
 
-    # You can replace this with a custom classifier later
+    # Simple keyword-based categorization
     if "refund" in ticket_text.lower() or "charge" in ticket_text.lower():
         category = "Billing"
         response = "Please check your billing history. We'll process any necessary refunds."
