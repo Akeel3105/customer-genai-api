@@ -1,6 +1,4 @@
 fastapi
 uvicorn
-transformers
-torch
-scipy
-pydantic
+scikit-learn
+numpy
