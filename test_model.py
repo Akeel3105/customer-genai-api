@@ -8,4 +8,3 @@ result = classify_ticket(ticket_text)
 
 print("Classification Result:")
 print(result)
-

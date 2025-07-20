@@ -2,8 +2,10 @@
 
 from pydantic import BaseModel
 
+
 class TicketRequest(BaseModel):
     ticket: str
+
 
 class TicketResponse(BaseModel):
     sentiment: str

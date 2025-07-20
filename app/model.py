@@ -13,7 +13,7 @@ train_data = [
     "Help me with a technical issue",
     "The website shows an error",
     "Billing issue with my invoice",
-    "Close my account"
+    "Close my account",
 ]
 
 train_labels = [
@@ -26,7 +26,7 @@ train_labels = [
     "Technical Support",
     "Technical Support",
     "Billing",
-    "Cancellation"
+    "Cancellation",
 ]
 
 # Train a simple model
@@ -36,6 +36,7 @@ X_train = vectorizer.fit_transform(train_data)
 classifier = MultinomialNB()
 classifier.fit(X_train, train_labels)
 
+
 def classify_ticket(ticket_text: str) -> dict:
     print("📨 Classifying with scikit-learn model")
     X_test = vectorizer.transform([ticket_text])
@@ -44,9 +45,13 @@ def classify_ticket(ticket_text: str) -> dict:
 
     # Basic response logic
     if category == "Billing":
-        response = "Please check your billing history. We'll process any necessary refunds."
+        response = (
+            "Please check your billing history. We'll process any necessary refunds."
+        )
     elif category == "Technical Support":
-        response = "Our tech team is on it. Can you provide more details about the issue?"
+        response = (
+            "Our tech team is on it. Can you provide more details about the issue?"
+        )
     elif category == "Cancellation":
         response = "We're sorry to see you go. Your subscription will be canceled as requested."
     else:
@@ -54,8 +59,8 @@ def classify_ticket(ticket_text: str) -> dict:
         response = "Thank you for your message. We'll get back to you shortly."
 
     return {
-	"sentiment": "Neutral", # Dummy Value
+        "sentiment": "Neutral",  # Dummy Value
         "category": category,
         "confidence": round(float(proba), 2),
-        "response": response
+        "response": response,
     }
