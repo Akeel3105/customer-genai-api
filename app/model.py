@@ -54,6 +54,7 @@ def classify_ticket(ticket_text: str) -> dict:
         response = "Thank you for your message. We'll get back to you shortly."
 
     return {
+	"sentiment": "Neutral", # Dummy Value
         "category": category,
         "confidence": round(float(proba), 2),
         "response": response
